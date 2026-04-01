@@ -129,3 +129,46 @@ This packet is the end of the three-way handshake and established the connection
 1. **FIN, ACK**
 2. **FIN, ACK,**
 3. **ACK**
+
+## Networking Primer - Layers 5-7
+### HTTP
+- Hypertext Transfer Protocol (**HTTP**) is a stateless Application Layer protocol that has been in use since 1990. 
+- HTTP enables the transfer of data in clear text between a client and server over TCP.
+- The client would send an HTTP request to the server, asking for a resource. A session is established, and the server responds with the requested media (HTML, images, hyperlinks, video). 
+- HTTP utilizes ports 80 or 8000 over TCP during normal operations. In exceptional circumstances, it can be modified to use alternate ports, or even at times, UDP.
+### HTTP Methods
+- To perform operations such as fetching webpages, requesting items for download, or posting your most recent tweet all require the use of specific methods. 
+- These methods define the actions taken when requesting a URI.
+![methods](image-6.png)
+
+### HTTPS
+- HTTP Secure (**HTTPS**) is a modification of the HTTP protocol designed to utilize Transport Layer Security (TLS) or Secure Sockets Layer (SSL) with older applications for data security.
+- TLS is utilized as an encryption mechanism to secure the communications between a client and a server.
+- HTTPS utilizes ports 443 and 8443 instead of the standard port 80. This is a simple way for the client to signal the server that it wishes to establish a secure connection.
+#### TLS Handshake Via HTTPS
+![TLS handshake](image-7.png)
+ 
+1. Client and server exchange hello messages to agree on connection parameters.
+2. Client and server exchange necessary cryptographic parameters to establish a premaster secret.
+3. Client and server will exchange x.509 certificates and cryptographic information allowing for authentication within the session.
+4. Generate a master secret from the premaster secret and exchanged random values.
+5. Client and server issue negotiated security parameters to the record layer portion of the TLS protocol.
+6. Client and server verify that their peer has calculated the same security parameters and that the handshake occurred without tampering by an attacker.
+
+### FTP
+- File Transfer Protocol (FTP) is an Application Layer protocol that enables quick data transfer between computing devices.
+- FTP can be utilized from the command-line, web browser, or through a graphical FTP client such as FileZilla.
+- FTP itself is established as an insecure protocol, and most users have moved to utilize tools such as **SFTP** to transfer files through secure channels.
+- FTP uses ports 20 and 21 over TCP. Port 20 is used for data transfer, while port 21 is utilized for issuing commands controlling the FTP session. - FTP supports user authentication as well as allowing anonymous access if configured.
+- FTP is capable of running in two different modes, **active** or **passive**. 
+- Active is the default operational method utilized by FTP, meaning that the server listens for a control command PORT from the client, stating what port to use for data transfer. 
+- Passive mode enables us to access FTP servers located behind firewalls or a NAT-enabled link that makes direct TCP connections impossible.
+#### FTP Commands
+![FTP Commands](image-8.png)
+
+### SMB
+- Server Message Block (SMB) is a protocol most widely seen in Windows enterprise environments that enables sharing resources between hosts over common networking architectures.
+- SMB is a connection-oriented protocol that requires user authentication from the host to the resource to ensure the user has correct permissions to use that resource or perform actions.
+- In the past, SMB utilized NetBIOS as its transport mechanism over UDP ports 137 and 138. 
+- Since modern changes, SMB now supports direct TCP transport over port 445, NetBIOS over TCP port 139, and the QUIC protocol.
+- As a user, SMB provides us easy and convenient access to resources like printers, shared drives, authentication servers, and more. hence, SMB is very attractive to potential attackers as well.
